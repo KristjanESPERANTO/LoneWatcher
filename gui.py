@@ -86,7 +86,6 @@ class StatusGUI:
                 del row_frame.action_button
         else:
             self.root.lift()
-            self.root.focus_force()
             status_label.config(text="❌", fg="red")
             if not hasattr(row_frame, "action_button"):
                 row_frame.action_button = tk.Button(
