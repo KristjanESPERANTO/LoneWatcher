@@ -1,0 +1,8 @@
+__pycache__
+history.log
+build/
+dist/
+main.spec
+*.toml
+!system.toml
+!config.toml
