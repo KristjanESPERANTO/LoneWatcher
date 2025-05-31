@@ -27,6 +27,8 @@ class StatusGUI:
 
         self.center_window()
 
+        self.last_highlighted_row = None
+
         for i, target in enumerate(monitoring_targets):
             # width is not fixed, but calculated based on the target name length but max 550
             width = min(len(target["name"]) * 10 + 250, 800)
@@ -52,18 +54,30 @@ class StatusGUI:
 
             self.status_labels[target["name"]] = (name_label, status_label, row_frame)
 
+    def clear_highlight(self, row):
+        row_frame, status_label, name_label = row
+        row_frame.configure(bg="black")
+        status_label.configure(bg="black")
+        name_label.configure(bg="black")
 
     def update_status(self, target, success):
         name_label, status_label, row_frame = self.status_labels[target["name"]]
 
-        # Highlight the row
+        # Clear previous highlight if it exists
+        if self.last_highlighted_row is not None:
+            self.clear_highlight(self.last_highlighted_row)
+            self.last_highlighted_row = None
+
+        # Highlight the current row
         row_frame.configure(bg="#333333")
         status_label.configure(bg="#333333")
         name_label.configure(bg="#333333")
 
-        self.root.after(500, lambda: row_frame.configure(bg="black"))
-        self.root.after(500, lambda: status_label.configure(bg="black"))
-        self.root.after(500, lambda: name_label.configure(bg="black"))
+        # Store current highlighted row
+        self.last_highlighted_row = (row_frame, status_label, name_label)
+
+        # Schedule highlight removal for last row
+        self.root.after(3000, lambda: self.clear_highlight((row_frame, status_label, name_label)))
 
         if success:
             status_label.config(text="✔", fg="green")
