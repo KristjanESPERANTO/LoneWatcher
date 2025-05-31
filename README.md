@@ -42,7 +42,8 @@ This project is licensed under the ISC License. See the [LICENSE](LICENSE.md) fi
 
 ## To Do
 
-- Move "statuses" handling to GUI?
+- Fix the effect, that the focus gets stolen by the GUI when an error occurs.
+- Move "statuses" handling to GUI? This also would allow to optimize the clear_highlight function.
 - Add Info button in GUI (with LICENSE, Author, Version and Repository URL)
 - Figure out how to manage scripts in python (like package.json or a make file) - ideally system independently
 - Settings GUI - separate or in GUI
