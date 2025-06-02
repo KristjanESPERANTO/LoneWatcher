@@ -1,7 +1,7 @@
 import tkinter as tk
 import tomllib
 
-with open("system.toml", "rb") as file:
+with open("config.toml", "rb") as file:
     system_info = tomllib.load(file)
     print(system_info)
     name = system_info["system"]["name"]

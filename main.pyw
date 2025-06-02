@@ -7,7 +7,7 @@ from gui import StatusGUI
 from check_process import is_script
 from monitor import monitor_system
 
-with open("config.toml", "rb") as file:
+with open("targets.toml", "rb") as file:
     config = tomllib.load(file)
     monitoring_targets = config["monitoring"]["entities"]
 

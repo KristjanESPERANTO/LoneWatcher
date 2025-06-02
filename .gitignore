@@ -4,5 +4,5 @@ build/
 dist/
 main.spec
 *.toml
-!system.toml
 !config.toml
+!targets.toml

@@ -1,0 +1,37 @@
+[monitoring]
+
+[[monitoring.entities]]
+name = "Website GitHub"
+address = "https://github.com/"
+type = "http"
+action = "Call Bill"
+
+[[monitoring.entities]]
+name = "Website x"
+address = "https://intranet.company.com/"
+type = "http"
+action = "Call Tom"
+
+[[monitoring.entities]]
+name = "NAS Server X"
+address = "192.168.1.99"
+type = "ping"
+action = "Reboot NAS"
+
+[[monitoring.entities]]
+name = "Router"
+address = "192.168.178.1"
+type = "ping"
+action = "Reboot Router"
+
+[[monitoring.entities]]
+name = "Important Service"
+address = "RpcEptMapper"
+type = "service"
+action = "Restart Workstation\nIf not successful, call IT"
+
+[[monitoring.entities]]
+name = "Printer Service"
+address = "cups.service"
+type = "service"
+action = "Restart Workstation\nIf not successful, call IT"
