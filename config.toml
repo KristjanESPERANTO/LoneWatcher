@@ -10,6 +10,7 @@ custom_title = ""             # Title of the GUI window - if not set, default is
 char_width_multiplier = 6     # Multiplier for character width in the GUI
 additional_row_width = 150    # Additional width for each row in the GUI
 max_row_width = 500           # Maximum width for each row in the GUI
+font_size = 14                # Font size for the GUI
 
 [timer]
 initial_minimize_delay = 3    # Time before minimizing window on first run

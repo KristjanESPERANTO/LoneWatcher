@@ -12,6 +12,7 @@ with open("config.toml", "rb") as file:
     char_width_multiplier = system_info["gui"]["char_width_multiplier"]
     additional_row_width = system_info["gui"]["additional_row_width"]
     max_row_width = system_info["gui"]["max_row_width"]
+    font_size = system_info["gui"]["font_size"]
 
 
 class StatusGUI:
@@ -48,7 +49,7 @@ class StatusGUI:
             status_label = tk.Label(
                 row_frame,
                 text="❓",
-                font=("Arial", 14, "bold"),
+                font=("Arial", font_size, "bold"),
                 fg="white",
                 bg="black",
                 anchor="center",
@@ -59,7 +60,7 @@ class StatusGUI:
             actions_label = tk.Label(
                 row_frame,
                 text="",
-                font=("Arial", 14, "bold"),
+                font=("Arial", font_size, "bold"),
                 fg="yellow",
                 bg="black",
                 anchor="center",
@@ -70,7 +71,7 @@ class StatusGUI:
             name_label = tk.Label(
                 row_frame,
                 text=target["name"],
-                font=("Arial", 14, "normal"),
+                font=("Arial", font_size, "normal"),
                 fg="white",
                 bg="black",
                 anchor="w",
@@ -141,10 +142,15 @@ class StatusGUI:
             text=f"Empfohlene Aktion für\n{target['name']}",  # TODO: translation
             fg="black",
             bg="white",
-            font=("Arial", 12, "bold"),
+            font=("Arial", font_size, "bold"),
         ).pack(pady=10)
         tk.Label(
-            popup, text=target["action"], fg="black", bg="white", wraplength=280
+            popup,
+            text=target["action"],
+            fg="black",
+            bg="white",
+            wraplength=280,
+            font=("Arial", font_size, "normal"),
         ).pack(pady=5)
 
         tk.Button(popup, text="OK", command=popup.destroy).pack(pady=10)
