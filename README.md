@@ -42,7 +42,6 @@ This project is licensed under the ISC License. See the [LICENSE](LICENSE.md) fi
 
 ## To Do
 
-- update Screenshot
 - configs
   - move all Timers to `config.toml`
 - Move "statuses" handling to GUI? This also would allow to optimize the `clear_highlight` function.
