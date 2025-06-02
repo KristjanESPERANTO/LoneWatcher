@@ -5,7 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.1.1](https://github.com/KristjanESPERANTO/LoneWatcher/tag/v0.1.1) - 2015-05-31
+## [0.2.0](https://github.com/KristjanESPERANTO/LoneWatcher/compare/v0.1.1...v0.2.0) - 2015-06-02
+
+### Changed
+
+- chore: update screenshot
+- refactor: rename config files
+- feat: move timers to `config.toml`
+- feat: move font_size to `config.toml`
+
+### Added
+
+- feat: add translations support
+- refactor: add width setting to `config.toml`
+
+## [0.1.1](https://github.com/KristjanESPERANTO/LoneWatcher/compare/v0.1.0...v0.1.1) - 2015-05-31
 
 ### Changed
 
