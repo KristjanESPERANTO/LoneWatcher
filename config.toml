@@ -6,6 +6,7 @@ license = "ISC"
 repository = "https://github.com/KristjanESPERANTO/LoneWatcher"
 
 [gui]
+language = "en"               # Language for the GUI, options: "en" and "de"
 custom_title = ""             # Title of the GUI window - if not set, default is system name + version
 char_width_multiplier = 6     # Multiplier for character width in the GUI
 additional_row_width = 150    # Additional width for each row in the GUI

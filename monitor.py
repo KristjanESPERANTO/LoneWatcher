@@ -6,12 +6,12 @@ import tomllib
 
 
 with open("config.toml", "rb") as file:
-    system_info = tomllib.load(file)
+    config = tomllib.load(file)
 
-    initial_minimize_delay = system_info["timer"]["initial_minimize_delay"]
-    status_check_interval = system_info["timer"]["status_check_interval"]
-    all_green_interval = system_info["timer"]["all_green_interval"]
-    alert_interval = system_info["timer"]["alert_interval"]
+    initial_minimize_delay = config["timer"]["initial_minimize_delay"]
+    status_check_interval = config["timer"]["status_check_interval"]
+    all_green_interval = config["timer"]["all_green_interval"]
+    alert_interval = config["timer"]["alert_interval"]
 
 
 def monitor_system(monitoring_targets, gui_instance, logging):

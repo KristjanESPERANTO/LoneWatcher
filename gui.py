@@ -2,18 +2,22 @@ import tkinter as tk
 import tomllib
 
 with open("config.toml", "rb") as file:
-    system_info = tomllib.load(file)
-    version = system_info["system"]["version"]
+    config = tomllib.load(file)
+    version = config["system"]["version"]
     title = (
-        system_info["gui"]["custom_title"]
-        if system_info["gui"]["custom_title"]
+        config["gui"]["custom_title"]
+        if config["gui"]["custom_title"]
         else "LoneWatcher"
     )
-    char_width_multiplier = system_info["gui"]["char_width_multiplier"]
-    additional_row_width = system_info["gui"]["additional_row_width"]
-    max_row_width = system_info["gui"]["max_row_width"]
-    font_size = system_info["gui"]["font_size"]
+    language = config["gui"]["language"]
+    char_width_multiplier = config["gui"]["char_width_multiplier"]
+    additional_row_width = config["gui"]["additional_row_width"]
+    max_row_width = config["gui"]["max_row_width"]
+    font_size = config["gui"]["font_size"]
 
+with open("translations.toml", "rb") as file:
+    translations = tomllib.load(file)
+    translation = translations.get(language, translations["en"])
 
 class StatusGUI:
     def __init__(self, monitoring_targets):
@@ -133,13 +137,13 @@ class StatusGUI:
 
     def show_action_popup(self, target):
         popup = tk.Toplevel(self.root)
-        popup.title(f"Empfehlung für {target['name']}")  # TODO: translation
+        popup.title(f"{translation['recommended_for']} {target['name']}")
         popup.geometry("300x150")
         popup.configure(bg="white")
 
         tk.Label(
             popup,
-            text=f"Empfohlene Aktion für\n{target['name']}",  # TODO: translation
+            text=f"{translation['recommended_action']}\n{target['name']}",
             fg="black",
             bg="white",
             font=("Arial", font_size, "bold"),

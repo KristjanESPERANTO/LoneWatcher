@@ -1,0 +1,9 @@
+[en]
+description = "A lightweight, decentralized monitoring tool."
+recommended_for = "Recommendation for "
+recommended_action = "Recommended action:"
+
+[de]
+description = "Ein leichtgewichtiges, dezentrales Überwachungstool."
+recommended_for = "Empfehlung für "
+recommended_action = "Empfohlene Aktion:"

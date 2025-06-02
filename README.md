@@ -49,4 +49,3 @@ This project is licensed under the ISC License. See the [LICENSE](LICENSE.md) fi
 - watch config file or read config file periodically
 - hostname specific config
 - add linter and formatter / black
-- translation file(s)

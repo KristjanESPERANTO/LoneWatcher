@@ -6,3 +6,4 @@ main.spec
 *.toml
 !config.toml
 !targets.toml
+!translations.toml
