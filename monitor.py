@@ -3,26 +3,32 @@ import requests
 import subprocess
 import time
 
+
 def monitor_system(monitoring_targets, gui_instance, logging):
     first_iteration = True
     while True:
         for target in monitoring_targets:
             success = check_target(target)
-            target['status'] = success
+            target["status"] = success
             if not success:
-                logging.error("check failed: %s %s %s", target['type'], target['name'], target['address'])
+                logging.error(
+                    "check failed: %s %s %s",
+                    target["type"],
+                    target["name"],
+                    target["address"],
+                )
                 gui_instance.update_status(target, False)
             else:
                 gui_instance.update_status(target, True)
 
-            statuses = [t.get('status') for t in monitoring_targets]
+            statuses = [t.get("status") for t in monitoring_targets]
             if False in statuses:
                 if gui_instance.root.cget("bg") != "red":
                     gui_instance.root.bell()
                     gui_instance.root.configure(bg="red")
                     gui_instance.root.attributes("-topmost", True)
                     gui_instance.root.deiconify()
-                    
+
             elif all(statuses):
                 gui_instance.root.configure(bg="green")
                 gui_instance.root.attributes("-topmost", False)
@@ -35,9 +41,13 @@ def monitor_system(monitoring_targets, gui_instance, logging):
                 gui_instance.root.configure(bg="grey")
                 gui_instance.root.attributes("-topmost", False)
             time.sleep(0.5)
-        
+
         # Only check every minute if all is green, else check four time a minute
-        time.sleep(60) if all(statuses) else time.sleep(15)
+        if all(statuses):
+            time.sleep(60)
+        else:
+            time.sleep(15)
+
 
 def check_target(target):
     if target["type"] == "ping":
@@ -48,6 +58,7 @@ def check_target(target):
         return check_service(target["address"])
     else:
         return False
+
 
 def check_ip(ip):
     """Checks if an IP address responds to ping."""
@@ -62,7 +73,8 @@ def check_ip(ip):
         params,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
-        creationflags=creation_flags
+        creationflags=creation_flags,
+        check=False,
     )
 
     output = str(result.stdout).lower()

@@ -44,7 +44,6 @@ This project is licensed under the ISC License. See the [LICENSE](LICENSE.md) fi
 
 - update Screenshot
 - configs
-  - add width to `config.toml`
   - move all Timers to `config.toml`
 - Move "statuses" handling to GUI? This also would allow to optimize the `clear_highlight` function.
 - Add Info button in GUI (with LICENSE, Author, Version and Repository URL)

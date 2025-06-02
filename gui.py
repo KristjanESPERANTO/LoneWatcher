@@ -3,15 +3,21 @@ import tomllib
 
 with open("config.toml", "rb") as file:
     system_info = tomllib.load(file)
-    print(system_info)
-    name = system_info["system"]["name"]
     version = system_info["system"]["version"]
+    title = (
+        system_info["gui"]["custom_title"]
+        if system_info["gui"]["custom_title"]
+        else "LoneWatcher"
+    )
+    char_width_multiplier = system_info["gui"]["char_width_multiplier"]
+    additional_row_width = system_info["gui"]["additional_row_width"]
+    max_row_width = system_info["gui"]["max_row_width"]
 
 
 class StatusGUI:
     def __init__(self, monitoring_targets):
         self.root = tk.Tk()
-        self.root.title(f"{name} - {version}")
+        self.root.title(f"{title} - {version}")
         icon = tk.PhotoImage(file="./icon/app_icon.png")
         self.root.iconphoto(True, icon)
         self.root.attributes("-alpha", 0.80)
@@ -30,8 +36,10 @@ class StatusGUI:
         self.last_highlighted_row = None
 
         for i, target in enumerate(monitoring_targets):
-            # width is not fixed, but calculated based on the target name length
-            width = min(len(target["name"]) * 6 + 150, 800)
+            width = min(
+                len(target["name"]) * char_width_multiplier + additional_row_width,
+                max_row_width,
+            )
 
             row_frame = tk.Frame(self.frame, bg="black", height=50, width=width)
             row_frame.grid(row=i, column=0, columnspan=3, sticky="ew", padx=5, pady=2)
@@ -69,7 +77,12 @@ class StatusGUI:
             )
             name_label.grid(row=0, column=2, padx=5, pady=15)
 
-            self.status_labels[target["name"]] = (status_label, actions_label, name_label, row_frame)
+            self.status_labels[target["name"]] = (
+                status_label,
+                actions_label,
+                name_label,
+                row_frame,
+            )
 
     def clear_highlight(self, row):
         status_label, actions_label, name_label, row_frame = row
@@ -79,7 +92,9 @@ class StatusGUI:
         name_label.configure(bg="black")
 
     def update_status(self, target, success):
-        status_label, actions_label, name_label, row_frame = self.status_labels[target["name"]]
+        status_label, actions_label, name_label, row_frame = self.status_labels[
+            target["name"]
+        ]
 
         # Clear previous highlight if it exists
         if self.last_highlighted_row is not None:
@@ -96,7 +111,12 @@ class StatusGUI:
         self.last_highlighted_row = (status_label, actions_label, name_label, row_frame)
 
         # Schedule highlight removal for last row
-        self.root.after(3000, lambda: self.clear_highlight((status_label, actions_label, name_label, row_frame)))
+        self.root.after(
+            3000,
+            lambda: self.clear_highlight(
+                (status_label, actions_label, name_label, row_frame)
+            ),
+        )
 
         if success:
             status_label.config(text="✔", fg="green")
@@ -105,7 +125,9 @@ class StatusGUI:
             self.root.lift()
             status_label.config(text="❌", fg="red")
             actions_label.config(text="ℹ")
-            actions_label.bind('<Button-1>', lambda e, t=target: self.show_action_popup(t))
+            actions_label.bind(
+                "<Button-1>", lambda e, t=target: self.show_action_popup(t)
+            )
             actions_label.config(cursor="hand2")  # Changes cursor to hand when hovering
 
     def show_action_popup(self, target):
