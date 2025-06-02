@@ -2,6 +2,16 @@ import psutil
 import requests
 import subprocess
 import time
+import tomllib
+
+
+with open("config.toml", "rb") as file:
+    system_info = tomllib.load(file)
+
+    initial_minimize_delay = system_info["timer"]["initial_minimize_delay"]
+    status_check_interval = system_info["timer"]["status_check_interval"]
+    all_green_interval = system_info["timer"]["all_green_interval"]
+    alert_interval = system_info["timer"]["alert_interval"]
 
 
 def monitor_system(monitoring_targets, gui_instance, logging):
@@ -34,19 +44,19 @@ def monitor_system(monitoring_targets, gui_instance, logging):
                 gui_instance.root.attributes("-topmost", False)
                 print(first_iteration)
                 if first_iteration:
-                    time.sleep(3)
+                    time.sleep(initial_minimize_delay)
                     gui_instance.root.iconify()
                 first_iteration = False
             else:
                 gui_instance.root.configure(bg="grey")
                 gui_instance.root.attributes("-topmost", False)
-            time.sleep(0.5)
+            time.sleep(status_check_interval)
 
         # Only check every minute if all is green, else check four time a minute
         if all(statuses):
-            time.sleep(60)
+            time.sleep(all_green_interval)
         else:
-            time.sleep(15)
+            time.sleep(alert_interval)
 
 
 def check_target(target):
