@@ -1,7 +1,6 @@
 [system]
 version = "0.2.0"
 author = "Kristjan ESPERANTO"
-description = "A lightweight, decentralized monitoring tool designed to run independently on a local system."
 license = "ISC"
 repository = "https://github.com/KristjanESPERANTO/LoneWatcher"
 
