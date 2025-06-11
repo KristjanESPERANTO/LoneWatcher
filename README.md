@@ -42,6 +42,7 @@ This project is licensed under the ISC License. See the [LICENSE](LICENSE.md) fi
 
 ## To Do
 
+- ping warning only if it fails n times in a row.
 - Hardcode system information
 - Log
   - start
