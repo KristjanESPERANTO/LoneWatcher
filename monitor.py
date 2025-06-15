@@ -1,9 +1,9 @@
-import psutil
-import requests
 import subprocess
 import time
 import tomllib
 
+import psutil
+import requests
 
 with open("config.toml", "rb") as file:
     config = tomllib.load(file)
@@ -62,12 +62,11 @@ def monitor_system(monitoring_targets, gui_instance, logging):
 def check_target(target):
     if target["type"] == "ping":
         return check_ip(target["address"])
-    elif target["type"] == "http":
+    if target["type"] == "http":
         return check_website(target["address"])
-    elif target["type"] == "service":
+    if target["type"] == "service":
         return check_service(target["address"])
-    else:
-        return False
+    return False
 
 
 def check_ip(ip):

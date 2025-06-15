@@ -55,5 +55,4 @@ def is_script():
     own_name = psutil.Process(own_pid).name()
     if own_name in ["python", "python.exe", "python3"]:
         return True
-    else:
-        return False
+    return False
