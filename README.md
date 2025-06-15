@@ -20,10 +20,19 @@
 
 ## Installation
 
-Just clone the repository:
+Just clone the repository and install the required dependencies:
 
 ```bash
 git clone https://github.com/KristjanESPERANTO/LoneWatcher
+pip install -r requirements.txt
+```
+
+## Startup
+
+To start the application, run the following command:
+
+```bash
+python main.pyw
 ```
 
 ## Usage
@@ -40,11 +49,23 @@ Contributions are welcome! If you have suggestions for improvements or new featu
 
 This project is licensed under the ISC License. See the [LICENSE](LICENSE.md) file for details.
 
+## Development
+
+### Commands
+
+- `make lint` - Run the linter to check code style.
+
 ## To Do
 
+- prevent starting more than one instance (as setting)
+- ping warning only if it fails n times in a row.
+- Hardcode system information
+- Log
+  - start
+  - end
+  - switch between green and red
 - Move "statuses" handling to GUI? This also would allow to optimize the `clear_highlight` function.
 - Add Info button in GUI (with LICENSE, Author, Version and Repository URL)
-- Figure out how to manage scripts in python (like package.json or a make file) - ideally system independently
 - create Settings GUI - separate or in GUI
 - watch config file or read config file periodically
 - hostname specific config

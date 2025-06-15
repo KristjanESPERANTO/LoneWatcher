@@ -7,3 +7,4 @@ main.spec
 !config.toml
 !targets.toml
 !translations.toml
+!pyproject.toml
