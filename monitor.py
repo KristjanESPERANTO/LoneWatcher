@@ -61,7 +61,7 @@ def monitor_system(monitoring_targets, gui_instance, logging):
 
 def check_target(target):
     if target["type"] == "ping":
-        return check_ip(target["address"])
+        return check_ping(target["address"])
     if target["type"] == "http":
         return check_website(target["address"])
     if target["type"] == "service":
@@ -69,26 +69,29 @@ def check_target(target):
     return False
 
 
-def check_ip(ip):
-    """Checks if an IP address responds to ping."""
-    if psutil.WINDOWS:
-        params = ["ping", "-n", "1", ip]
-        creation_flags = subprocess.CREATE_NO_WINDOW
-    else:
-        params = ["ping", "-c", "1", "-W", "2", ip]
-        creation_flags = 0
+def check_ping(ip):
+    """Checks if an IP address responds to ping, with up to 3 retries."""
+    def single_ping():
+        if psutil.WINDOWS:
+            params = ["ping", "-n", "1", ip]
+            creation_flags = subprocess.CREATE_NO_WINDOW
+        else:
+            params = ["ping", "-c", "1", "-W", "2", ip]
+            creation_flags = 0
 
-    result = subprocess.run(
-        params,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        creationflags=creation_flags,
-        check=False,
-    )
+        result = subprocess.run(
+            params,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            creationflags=creation_flags,
+            check=False,
+        )
+        return "ttl" in str(result.stdout).lower()
 
-    output = str(result.stdout).lower()
-
-    return "ttl" in output
+    for _ in range(3):
+        if single_ping():
+            return True
+    return False
 
 
 def check_service(service_name):

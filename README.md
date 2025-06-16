@@ -58,7 +58,6 @@ This project is licensed under the ISC License. See the [LICENSE](LICENSE.md) fi
 ## To Do
 
 - prevent starting more than one instance (as setting)
-- ping warning only if it fails n times in a row.
 - Hardcode system information
 - Log
   - start
