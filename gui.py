@@ -1,33 +1,40 @@
 import tkinter as tk
 import tomllib
+import webbrowser
 
 with open("config.toml", "rb") as file:
-    config = tomllib.load(file)
-    version = config["system"]["version"]
-    title = (
-        config["gui"]["custom_title"]
-        if config["gui"]["custom_title"]
+    VERSION = "0.2.0"
+    CONFIG = tomllib.load(file)
+    AUTHOR = "Kristjan ESPERANTO"
+    LICENSE = "ISC"
+    LICENSE_URL = "https://github.com/KristjanESPERANTO/LoneWatcher/blob/main/LICENSE.md"
+    REPOSITORY = "https://github.com/KristjanESPERANTO/LoneWatcher"
+
+    TITLE = (
+        CONFIG["gui"]["custom_title"]
+        if CONFIG["gui"]["custom_title"]
         else "LoneWatcher"
     )
-    language = config["gui"]["language"]
-    char_width_multiplier = config["gui"]["char_width_multiplier"]
-    additional_row_width = config["gui"]["additional_row_width"]
-    max_row_width = config["gui"]["max_row_width"]
-    font_size = config["gui"]["font_size"]
+    LANGUAGE = CONFIG["gui"]["language"]
+    CHAR_WIDTH_MULTIPLIER = CONFIG["gui"]["char_width_multiplier"]
+    ADDITIONAL_ROW_WIDTH = CONFIG["gui"]["additional_row_width"]
+    MAX_ROW_WIDTH = CONFIG["gui"]["max_row_width"]
+    FONT_SIZE = CONFIG["gui"]["font_size"]
 
 with open("translations.toml", "rb") as file:
     translations = tomllib.load(file)
-    translation = translations.get(language, translations["en"])
+    translation = translations.get(LANGUAGE, translations["en"])
 
 class StatusGUI:
     def __init__(self, monitoring_targets):
         self.root = tk.Tk()
-        self.root.title(f"{title} - {version}")
+        self.root.title(f"{TITLE} - v{VERSION}")
         icon = tk.PhotoImage(file="./icon/app_icon.png")
         self.root.iconphoto(True, icon)
         self.root.attributes("-alpha", 0.80)
         self.root.configure(bg="black")
         self.root.attributes("-topmost", True)
+        self.root.resizable(False, False)
 
         # Main frame for table
         self.frame = tk.Frame(self.root, bg="black")
@@ -40,20 +47,36 @@ class StatusGUI:
 
         self.last_highlighted_row = None
 
+        # Info button
+        self.info_button = tk.Button(
+            self.frame,
+            text="ℹ",
+            command=self.show_info,
+            bg="black",
+            fg="#555555",
+            font=("Arial", FONT_SIZE-2, "bold"),
+            borderwidth=0,
+            highlightthickness=0,
+            padx=5,
+            pady=0
+        )
+        self.info_button.grid(row=0, column=3, sticky="ne")
+
+
         for i, target in enumerate(monitoring_targets):
             width = min(
-                len(target["name"]) * char_width_multiplier + additional_row_width,
-                max_row_width,
+                len(target["name"]) * CHAR_WIDTH_MULTIPLIER + ADDITIONAL_ROW_WIDTH,
+                MAX_ROW_WIDTH,
             )
 
             row_frame = tk.Frame(self.frame, bg="black", height=50, width=width)
-            row_frame.grid(row=i, column=0, columnspan=3, sticky="ew", padx=5, pady=2)
+            row_frame.grid(row=i, column=0, columnspan=3, sticky="ew", padx=(15,0), pady=5)
             row_frame.grid_propagate(False)  # Prevent frame from shrinking
 
             status_label = tk.Label(
                 row_frame,
                 text="❓",
-                font=("Arial", font_size, "bold"),
+                font=("Arial", FONT_SIZE, "bold"),
                 fg="white",
                 bg="black",
                 anchor="center",
@@ -64,7 +87,7 @@ class StatusGUI:
             actions_label = tk.Label(
                 row_frame,
                 text="",
-                font=("Arial", font_size, "bold"),
+                font=("Arial", FONT_SIZE, "bold"),
                 fg="yellow",
                 bg="black",
                 anchor="center",
@@ -75,7 +98,7 @@ class StatusGUI:
             name_label = tk.Label(
                 row_frame,
                 text=target["name"],
-                font=("Arial", font_size, "normal"),
+                font=("Arial", FONT_SIZE, "normal"),
                 fg="white",
                 bg="black",
                 anchor="w",
@@ -146,7 +169,7 @@ class StatusGUI:
             text=f"{translation['recommended_action']}\n{target['name']}",
             fg="black",
             bg="white",
-            font=("Arial", font_size, "bold"),
+            font=("Arial", FONT_SIZE, "bold"),
         ).pack(pady=10)
         tk.Label(
             popup,
@@ -154,7 +177,7 @@ class StatusGUI:
             fg="black",
             bg="white",
             wraplength=280,
-            font=("Arial", font_size, "normal"),
+            font=("Arial", FONT_SIZE, "normal"),
         ).pack(pady=5)
 
         tk.Button(popup, text="OK", command=popup.destroy).pack(pady=10)
@@ -168,3 +191,82 @@ class StatusGUI:
 
         # Set window position to screen center
         self.root.geometry(f"+{screen_width // 2}+{screen_height // 2}")
+
+    def show_info(self):
+        popup = tk.Toplevel(self.root)
+        popup.title(f"{TITLE} - v{VERSION}")
+        popup.configure(bg="white")
+        popup.resizable(False, False)
+        popup.iconphoto(True, tk.PhotoImage(file="./icon/app_icon.png"))
+        popup.attributes("-topmost", True)
+        popup.attributes("-alpha", 0.95)
+        popup.grab_set()
+        popup.focus_set()
+        popup.protocol("WM_DELETE_WINDOW", lambda: [popup.destroy(), self.info_button.config(state="normal")])
+
+        info_frame = tk.Frame(popup, bg="white")
+        info_frame.pack(padx=20, pady=20)
+
+        tk.Label(
+            info_frame,
+            text=translation["description"],
+            fg="black",
+            bg="white",
+            wraplength=400,
+            font=("Arial", FONT_SIZE, "normal"),
+        ).pack(pady=5)
+        tk.Label(
+            info_frame,
+            text="Author",
+            fg="black",
+            bg="white",
+            font=("Arial", FONT_SIZE, "bold"),
+        ).pack(pady=(5,0))
+        tk.Label(
+            info_frame,
+            text=AUTHOR,
+            fg="black",
+            bg="white",
+            font=("Arial", FONT_SIZE, "normal"),
+        ).pack(pady=(0,5))
+
+        tk.Label(
+            info_frame,
+            text="License",
+            fg="black",
+            bg="white",
+            font=("Arial", FONT_SIZE, "bold"),
+        ).pack(pady=(5,0))
+        license_label = tk.Label(
+            info_frame,
+            text=LICENSE,
+            fg="blue",
+            bg="white",
+            font=("Arial", FONT_SIZE, "normal", "underline"),
+            cursor="hand2"
+        )
+        license_label.pack(pady=(0,5))
+        license_label.bind("<Button-1>", lambda e: open_url(LICENSE_URL))
+
+        tk.Label(
+            info_frame,
+            text="Repository",
+            fg="black",
+            bg="white",
+            font=("Arial", FONT_SIZE, "bold"),
+        ).pack(pady=(5,0))
+        url_label = tk.Label(
+            info_frame,
+            text=REPOSITORY,
+            fg="blue",
+            bg="white",
+            font=("Arial", FONT_SIZE, "normal", "underline"),
+            cursor="hand2"
+        )
+        url_label.pack(pady=(0,5))
+        url_label.bind("<Button-1>", lambda e: open_url(REPOSITORY))
+
+        def open_url(url):
+            webbrowser.open(url)
+
+        self.info_button.config(state="disabled")

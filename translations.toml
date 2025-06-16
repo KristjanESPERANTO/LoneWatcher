@@ -1,9 +1,9 @@
 [en]
-description = "A lightweight, decentralized monitoring tool designed to run independently on a local system."
+description = "A lightweight, decentralized open-source monitoring tool designed to run independently on a local system."
 recommended_for = "Recommendation for "
 recommended_action = "Recommended action:"
 
 [de]
-description = "Ein leichtgewichtiges, dezentrales Überwachungstool - entworfen um auf einem lokalen System zu laufen."
+description = "Ein leichtgewichtiges, dezentrales Open-Source-Überwachungstool - entworfen um auf einem lokalen System zu laufen."
 recommended_for = "Empfehlung für "
 recommended_action = "Empfohlene Aktion:"

@@ -58,13 +58,11 @@ This project is licensed under the ISC License. See the [LICENSE](LICENSE.md) fi
 ## To Do
 
 - prevent starting more than one instance (as setting)
-- Hardcode system information
 - Log
   - start
   - end
   - switch between green and red
 - Move "statuses" handling to GUI? This also would allow to optimize the `clear_highlight` function.
-- Add Info button in GUI (with LICENSE, Author, Version and Repository URL)
 - create Settings GUI - separate or in GUI
 - watch config file or read config file periodically
 - hostname specific config

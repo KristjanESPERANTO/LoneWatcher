@@ -1,9 +1,3 @@
-[system]
-version = "0.2.0"
-author = "Kristjan ESPERANTO"
-license = "ISC"
-repository = "https://github.com/KristjanESPERANTO/LoneWatcher"
-
 [gui]
 language = "en"               # Language for the GUI, options: "en" and "de"
 custom_title = ""             # Title of the GUI window - if not set, default is system name + version
