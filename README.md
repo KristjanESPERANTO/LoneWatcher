@@ -74,4 +74,3 @@ This project is licensed under the ISC License. See the [LICENSE](LICENSE.md) fi
 - create Settings GUI - separate or in GUI
 - watch config file or read config file periodically
 - hostname specific config
-- add linter and formatter / black

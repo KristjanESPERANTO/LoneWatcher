@@ -160,28 +160,54 @@ class StatusGUI:
 
     def show_action_popup(self, target):
         popup = tk.Toplevel(self.root)
-        popup.title(f"{translation['recommended_for']} {target['name']}")
-        popup.geometry("300x150")
+        popup.title(f"{target['type']} - {target['name']}")
         popup.configure(bg="white")
 
         tk.Label(
             popup,
-            text=f"{translation['recommended_action']}\n{target['name']}",
+            text=translation["recommended_action"],
             fg="black",
             bg="white",
             font=("Arial", FONT_SIZE, "bold"),
-        ).pack(pady=10)
+        ).pack(pady=(10, 0))
         tk.Label(
             popup,
             text=target["action"],
             fg="black",
             bg="white",
-            wraplength=280,
+            wraplength=600,
             font=("Arial", FONT_SIZE, "normal"),
-        ).pack(pady=5)
-
-        tk.Button(popup, text="OK", command=popup.destroy).pack(pady=10)
-
+        ).pack(pady=(0, 15), padx=15)
+        tk.Label(
+            popup,
+            text=translation["target_description"],
+            fg="black",
+            bg="white",
+            font=("Arial", FONT_SIZE, "bold"),
+        ).pack(pady=(10, 0))
+        tk.Label(
+            popup,
+            text=target["description"],
+            fg="black",
+            bg="white",
+            wraplength=600,
+            font=("Arial", FONT_SIZE, "normal"),
+        ).pack(pady=(0, 15), padx=15)
+        tk.Label(
+            popup,
+            text=translation["target_impact"],
+            fg="black",
+            bg="white",
+            font=("Arial", FONT_SIZE, "bold"),
+        ).pack(pady=(10, 0))
+        tk.Label(
+            popup,
+            text=target["impact"],
+            fg="black",
+            bg="white",
+            wraplength=600,
+            font=("Arial", FONT_SIZE, "normal"),
+        ).pack(pady=(0, 15), padx=15)
     def start_gui(self):
         self.root.mainloop()
 

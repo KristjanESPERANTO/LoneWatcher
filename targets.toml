@@ -5,33 +5,45 @@ name = "Website GitHub"
 address = "https://github.com/"
 type = "http"
 action = "Call Bill"
+description = "We need to keep an eye on GitHub for outages."
+impact = "High - GitHub is critical for our development workflow."
 
 [[monitoring.entities]]
 name = "Website x"
 address = "https://intranet.company.com/"
 type = "http"
-action = "Call Tom"
+action = "Call Tom if not reachable. If not reachable for 5 minutes, call IT.\nIf not reachable for 10 minutes, escalate to management."
+description = "We need to keep an eye on Website x for outages."
+impact = "Medium - This site is important for internal communications."
 
 [[monitoring.entities]]
 name = "NAS Server X"
 address = "192.168.1.99"
 type = "ping"
 action = "Reboot NAS"
+description = "We need to keep an eye on NAS Server X for outages."
+impact = "High - This server is critical for file storage."
 
 [[monitoring.entities]]
 name = "Router"
 address = "192.168.178.1"
 type = "ping"
 action = "Reboot Router"
+description = "We need to keep an eye on the Router for outages."
+impact = "High - The Router is critical for network connectivity."
 
 [[monitoring.entities]]
 name = "Important Service"
 address = "RpcEptMapper"
 type = "service"
 action = "Restart Workstation\nIf not successful, call IT"
+description = "We need to keep an eye on the Important Service for outages."
+impact = "High - This service is critical for application functionality."
 
 [[monitoring.entities]]
 name = "Printer Service"
 address = "cups.service"
 type = "service"
 action = "Restart Workstation\nIf not successful, call IT"
+description = "We need to keep an eye on the Printer Service for outages."
+impact = "Medium - This service is important for printing functionality."
