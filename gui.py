@@ -194,7 +194,7 @@ class StatusGUI:
 
     def show_info(self):
         popup = tk.Toplevel(self.root)
-        popup.title(f"{TITLE} - v{VERSION}")
+        popup.title(f"LoneWatcher - v{VERSION}")
         popup.configure(bg="white")
         popup.resizable(False, False)
         popup.iconphoto(True, tk.PhotoImage(file="./icon/app_icon.png"))
@@ -217,7 +217,7 @@ class StatusGUI:
         ).pack(pady=5)
         tk.Label(
             info_frame,
-            text="Author",
+            text=translation["info_author"],
             fg="black",
             bg="white",
             font=("Arial", FONT_SIZE, "bold"),
@@ -232,7 +232,7 @@ class StatusGUI:
 
         tk.Label(
             info_frame,
-            text="License",
+            text=translation["info_license"],
             fg="black",
             bg="white",
             font=("Arial", FONT_SIZE, "bold"),
@@ -250,7 +250,7 @@ class StatusGUI:
 
         tk.Label(
             info_frame,
-            text="Repository",
+            text=translation["info_repository"],
             fg="black",
             bg="white",
             font=("Arial", FONT_SIZE, "bold"),

@@ -2,8 +2,14 @@
 description = "A lightweight, decentralized open-source monitoring tool designed to run independently on a local system."
 recommended_for = "Recommendation for "
 recommended_action = "Recommended action:"
+info_author = "Author"
+info_license = "License"
+info_repository = "Repository"
 
 [de]
 description = "Ein leichtgewichtiges, dezentrales Open-Source-Überwachungstool - entworfen um auf einem lokalen System zu laufen."
 recommended_for = "Empfehlung für "
 recommended_action = "Empfohlene Aktion:"
+info_author = "Autor"
+info_license = "Lizenz"
+info_repository = "Repository"
