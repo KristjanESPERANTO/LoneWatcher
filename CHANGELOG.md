@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0](https://github.com/KristjanESPERANTO/LoneWatcher/compare/v0.2.0...v0.3.0) - 2015-06-16
+
+### Added
+
+- ci: add linter workflow and requirements.txt
+- feat: add info button to GUI
+- docs: add `Windows Executable` section to README
+
+### Changed
+
+- ci: update build script for Windows
+- feat: ping check fails only after the third fail and not after a single one
+- l10n: update description
+- refactor: handle linter issues
+
 ## [0.2.0](https://github.com/KristjanESPERANTO/LoneWatcher/compare/v0.1.1...v0.2.0) - 2015-06-02
 
 ### Changed
