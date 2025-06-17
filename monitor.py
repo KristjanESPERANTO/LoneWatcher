@@ -19,6 +19,15 @@ def monitor_system(monitoring_targets, gui_instance, logging):
     while True:
         for target in monitoring_targets:
             success = check_target(target)
+
+            # Log status change when a previously failed check now succeeds
+            if "status" in target and target["status"] is False and success is True:
+                logging.info("check succeeded: %s %s %s",
+                             target["type"],
+                             target["name"],
+                             target["address"],
+                             )
+
             target["status"] = success
             if not success:
                 logging.error(
