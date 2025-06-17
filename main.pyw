@@ -31,4 +31,6 @@ if __name__ == "__main__":
     monitoring_thread = threading.Thread(target=monitor_system, args=(monitoring_targets, gui, logging), daemon=True)
     monitoring_thread.start()
 
+    logging.info("LoneWatcher started")
     gui.start_gui()
+    logging.info("LoneWatcher stopped")
