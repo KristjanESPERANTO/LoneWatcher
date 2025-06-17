@@ -3,7 +3,7 @@ import tomllib
 import webbrowser
 
 with open("config.toml", "rb") as file:
-    VERSION = "0.3.0"
+    VERSION = "0.4.0"
     CONFIG = tomllib.load(file)
     AUTHOR = "Kristjan ESPERANTO"
     LICENSE = "ISC"
